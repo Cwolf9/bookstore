@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <constant name="struts.i18n.encoding" value="UTF-8" />
+    <package name="com.demo.controller" namespace="/" extends="struts-default">
+        <action name="user_*" class="com.demo.controller.Test" method="{1}">
+            <result name="top">/page/{1}.jsp</result>
+            <result name="update">/page/{1}.jsp</result>
+            <allowed-methods>top,showUser</allowed-methods>
+        </action>
+    </package>
+</struts>

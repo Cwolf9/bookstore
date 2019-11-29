@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <constant name="struts.i18n.encoding" value="UTF-8" />
+    <package name="default" namespace="/" extends="struts-default">
+        <action name="myShowUser" class="com.demo.controller.ShowUserAction"><!-- 与业务逻辑层Action对应 -->
+            <result name="success">/page/showUser.jsp</result><!-- 重定向至success.jsp -->
+        </action>
+        <!--<action name="login" class="com.demo.controller.MyLoginAction">&lt;!&ndash; 与业务逻辑层Action对应 &ndash;&gt;-->
+            <!--<result name="success">/loginSuccess.jsp</result>-->
+            <!--<result name="fail">/loginFail.jsp</result>-->
+            <!--<result name="input">/loginError.jsp</result>-->
+        <!--</action>-->
+    </package>
+    <include file="test.xml"></include>
+</struts>
+
+
+
+
+
+
+
+

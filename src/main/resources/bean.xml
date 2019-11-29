@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--把对象交给spring来管理-->
+    <!--  创建bean的三种方式
+        1. 使用默认构造函数创建。
+            在spring的配置文件种使用bean标签，配以id和class属性后且没有其他属性和标签时，
+            采用的就是默认构造函数创建bean对象，此时如果类中没有默认构造函数，则对象无法创建。
+        2. 使用普通工厂中的方法创建对象（使用某个类中的方法创建对象并存入spring容器）
+
+        3. 使用工厂中的静态方法创建对象（使用某个类中的静态方法创建对象并存入spring容器）
+    -->
+    <bean id = "helloService" class="com.demo.tbean.impl.HelloServiceImpl">
+    </bean>
+    <!--使用有参数构造函数-->
+    <bean id = "helloService2" class="com.demo.tbean.impl.HelloServiceImpl2">
+        <!--指定构造器参数-->
+        <property name = "message" value = "Hello World! Hello, Spring!"/>
+        <!--<constructor-arg index="0" value="Hello, Spring!!!" />-->
+    </bean>
+
+    <bean id = "helloStaticFactory" class="com.demo.tbean.impl.ApiStaticFactoryImpl" factory-method="newInstance">
+        <constructor-arg index="0" value="Hello, Static Factory!!!" />
+    </bean>
+
+    <bean id = "helloFactory" class="com.demo.tbean.impl.HelloServiceImpl3" >
+    </bean>
+    <bean id = "helloService3" factory-bean="helloFactory" factory-method="getHelloService">
+        <constructor-arg index="0" value="Hello, Factory!!!（实例工厂）" />
+    </bean>
+
+    <!--通过构造器参数索引方式依赖注入-->
+    <bean id = "DIbyIndex" class="com.demo.tbean.impl.ServiceDemo">
+        <constructor-arg index="0" value="10"></constructor-arg>
+        <constructor-arg index="1" value="Hello World! DI by Index!"></constructor-arg>
+    </bean>
+    <!--通过构造器参数类型方式依赖注入-->
+    <bean id = "DIbyType" class="com.demo.tbean.impl.ServiceDemo">
+        <constructor-arg type="int" value="11"></constructor-arg>
+        <constructor-arg type="java.lang.String" value="Hello World! DI by Type!"></constructor-arg>
+    </bean>
+    <!--通过构造器参数名称方式依赖注入-->
+    <bean id = "DIbyName" class="com.demo.tbean.impl.ServiceDemo">
+        <property name = "index" value = "12"/>
+        <property name = "message" value = "Hello World! DI by Name!"/>
+    </bean>
+
+    <bean id="DIsfByIndex" class="com.demo.tbean.impl.StaticServiceDemo" factory-method="getStaticService">
+        <constructor-arg index="0" value="20"></constructor-arg>
+        <constructor-arg index="1" value="Hello World! DI sf by Index!"></constructor-arg>
+    </bean>
+
+    <bean id="DIsfByType" class="com.demo.tbean.impl.StaticServiceDemo" factory-method="getStaticService">
+        <constructor-arg type="int" value="21"></constructor-arg>
+        <constructor-arg type="java.lang.String" value="Hello World! DI sf by Type!"></constructor-arg>
+    </bean>
+
+    <bean id="DIsfByName" class="com.demo.tbean.impl.StaticServiceDemo" factory-method="getStaticService">
+        <constructor-arg name="index" value="22"></constructor-arg>
+        <constructor-arg name="message" value="Hello World! DI sf by Name!"></constructor-arg>
+    </bean>
+    <bean id = "InstanceFactory" class="com.demo.tbean.impl.InstanceFactoryDemo"></bean>
+    <bean id="DIifByIndex" factory-bean="InstanceFactory" factory-method="getInstanceFactory">
+        <constructor-arg index="0" value="20"></constructor-arg>
+        <constructor-arg index="1" value="Hello World! DI if by Index!"></constructor-arg>
+    </bean>
+
+    <bean id="DIifByType" factory-bean="InstanceFactory" factory-method="getInstanceFactory">
+        <constructor-arg type="int" value="21"></constructor-arg>
+        <constructor-arg type="java.lang.String" value="Hello World! DI if by Type!"></constructor-arg>
+    </bean>
+
+    <bean id="DIifByName" factory-bean="InstanceFactory" factory-method="getInstanceFactory">
+        <constructor-arg name="index" value="22"></constructor-arg>
+        <constructor-arg name="message" value="Hello World! DI if by Name!"></constructor-arg>
+    </bean>
+    <!--使用setter方式进行依赖注入-->
+    <bean id="bean" class="com.demo.tbean.impl.ServiceDemo">
+        <property name = "index" value = "30"/>
+        <property name = "message" value = "Hello World! DI by setter!"/>
+    </bean>
+
+    <bean id="listBean" class="com.demo.tbean.ListTestBean">
+        <property name="values">
+            <list>
+                <value>0</value>
+                <value>1</value>
+                <value>2</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--定义依赖bean-->
+    <bean id = "LHHelloApi" class="com.demo.tbean.impl.HelloServiceImpl"></bean>
+    <!--通过构造器注入-->
+    <bean id="conBean" class="com.demo.tbean.impl.HelloApiDecorator">
+        <constructor-arg index="0" ref = "LHHelloApi"></constructor-arg>
+    </bean>
+    <!--通过setter注入-->
+    <bean id="setterBean" class="com.demo.tbean.impl.HelloApiDecorator">
+        <property name="hsApi"> <ref bean="LHHelloApi"></ref></property>
+    </bean>
+</beans>
