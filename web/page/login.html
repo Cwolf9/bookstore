@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+</head>
+<body>
+<h2>请输入用户名和口令：</h2>
+<form action="login.action" method="post">
+    <table>
+        <tr>
+            <td>用户名：</td>
+            <td><input type="text" name="name"></td>
+        </tr>
+        <tr>
+            <td>密码：</td>
+            <td><input type="password" name="psw"></td>
+        </tr>
+        <tr>
+            <td>joke：</td>
+            <td><input type="text" name="list[0]"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" name = "ok" value="提交">
+                <input type="reset" name = "cancel" value="重置">
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

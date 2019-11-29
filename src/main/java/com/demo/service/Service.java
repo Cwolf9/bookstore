@@ -31,6 +31,7 @@ import com.demo.util.JpaUtil;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
+import java.util.Random;
 
 public class Service {
     public static EntityManager em;
@@ -56,8 +57,9 @@ public class Service {
     }
     public void testDelete(int id) {
         em.getTransaction().begin();
-        User u = em.getReference(User.class, id);
+        User u = em.find(User.class, id);
         if(u == null) {
+            em.getTransaction().commit();
             System.out.println("删除失败！");
             return;
         }
@@ -68,7 +70,8 @@ public class Service {
     public void testUpdate(int id) {
         em.getTransaction().begin();
         User u = em.find(User.class, id);
-        u.setName("new" + id);
+        Random random = new Random();
+        u.setName("new" + id + random.nextInt(100));
         em.merge(u);
         em.getTransaction().commit();
     }

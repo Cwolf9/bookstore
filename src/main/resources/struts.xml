@@ -9,11 +9,11 @@
         <action name="myShowUser" class="com.demo.controller.ShowUserAction"><!-- 与业务逻辑层Action对应 -->
             <result name="success">/page/showUser.jsp</result><!-- 重定向至success.jsp -->
         </action>
-        <!--<action name="login" class="com.demo.controller.MyLoginAction">&lt;!&ndash; 与业务逻辑层Action对应 &ndash;&gt;-->
-            <!--<result name="success">/loginSuccess.jsp</result>-->
-            <!--<result name="fail">/loginFail.jsp</result>-->
-            <!--<result name="input">/loginError.jsp</result>-->
-        <!--</action>-->
+        <action name="login" class="com.demo.controller.MyLoginAction"><!-- 与业务逻辑层Action对应 -->
+            <result name="success">/page/loginSuccess.jsp</result>
+            <result name="fail">/page/loginFail.jsp</result>
+            <result name="input">/page/loginError.jsp</result>
+        </action>
     </package>
     <include file="test.xml"></include>
 </struts>
